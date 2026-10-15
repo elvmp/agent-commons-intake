@@ -67,4 +67,4 @@ export function createServer({dataDir=process.env.DATA_DIR||'./data',adminHash=p
  }catch(e){reply(res,e.status||500,{error:e.status?e.message:'The request could not be completed'});}});
  server.on('close',()=>db.close());return server;
 }
-if(process.argv[1]===fileURLToPath(import.meta.url)){const server=createServer();server.listen(Number(process.env.PORT)||3000,'0.0.0.0',()=>console.log('Agent Commons public intake ready on port '+server.address().port));}
+if(process.argv[1]===fileURLToPath(import.meta.url)){const server=createServer();server.listen(process.env.PORT===undefined?3000:Number(process.env.PORT),process.env.HOST||'0.0.0.0',()=>console.log('Agent Commons public intake ready on port '+server.address().port));}
